@@ -127,12 +127,37 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ```json
 {
-  "ver": "4",
-  "sender": "node-100"
+    "services": [
+        {
+            "name": "$node",
+            "settings": {},
+            "metadata": {},
+            "actions": [],
+            "events": {}
+        },
+        {
+            "name": "greeter",
+            "settings": {},
+            "metadata": {},
+            "actions": [],
+            "events": {}
+        }
+    ],
+    "ipList": ["10.35.0.34"],
+    "hostname": "moleculer-server",
+    "client": {
+        "type": "nodejs",
+        "version": "0.14.0-beta3",
+        "langVersion": "v12.10.0"
+    },
+    "config": {},
+    "instanceID": "ee21e97d-9fd0-4d7e-a303-70b1605f477f",
+    "metadata": {},
+    "seq": 2,
+    "ver": "4",
+    "sender": "nodeID-1"
 }
 ```
-
-!!TODO!!
 
 ### `HEARTBEAT`
 
@@ -197,12 +222,21 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ```json
 {
+  "id": "41238213-da6b-4313-9909-e6edd0e40a96",
+  "action": "greeter.hello",
+  "params": {},
+  "meta": {},
+  "timeout": 10000,
+  "level": 1,
+  "tracing": null,
+  "parentID": null,
+  "requestID": "41238213-da6b-4313-9909-e6edd0e40a96",
+  "caller": null,
+  "stream": false,
   "ver": "4",
-  "sender": "node-100"
+  "sender": "nodeID-1"
 }
 ```
-
-!!TODO!!
 
 ### `RESPONSE`
 
@@ -236,12 +270,16 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ```json
 {
+  "id": "a4dd3ae5-2eff-4924-94bc-4acb8ac034aa",
+  "meta": {},
+  "success": true,
+  "data": {
+    "message": "Hello Moleculer"
+  },
   "ver": "4",
-  "sender": "node-100"
+  "sender": "nodeID-2"
 }
 ```
-
-!!TODO!!
 
 ### `EVENT`
 
@@ -282,12 +320,26 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ```json
 {
+  "id": "e102630b-c702-4ff9-a0a1-52428395d57a",
+  "event": "some.test",
+  "data": {
+    "name": "John"
+  },
+  "groups": [
+    "greeter"
+  ],
+  "broadcast": false,
+  "meta": {},
+  "level": 1,
+  "tracing": null,
+  "parentID": null,
+  "requestID": "e102630b-c702-4ff9-a0a1-52428395d57a",
+  "caller": null,
+  "needAck": null,
   "ver": "4",
-  "sender": "node-100"
+  "sender": "nodeID-1"
 }
 ```
-
-!!TODO!!
 
 ### `EVENTACK`
 
@@ -345,12 +397,12 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ```json
 {
+  "time": 1567677050576,
+  "id": "3e09738f-cedf-4985-85fe-344860c06cfd",
   "ver": "4",
-  "sender": "node-100"
+  "sender": "nodeID-2"
 }
 ```
-
-!!TODO!!
 
 ### `PONG`
 
@@ -375,12 +427,13 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ```json
 {
+  "time": 1567677050576,
+  "id": "3e09738f-cedf-4985-85fe-344860c06cfd",
+  "arrived": 1567677050577,
   "ver": "4",
-  "sender": "node-100"
+  "sender": "nodeID-1"
 }
 ```
-
-!!TODO!!
 
 ### `DISCONNECT`
 
