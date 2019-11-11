@@ -8,22 +8,22 @@ This protocol is used to communicate between the Moleculer nodes.
 
 After the client is connected to the message broker (NATS, Redis, MQTT), it subscribes to the following topics:
 
-| Type                 | Topic name              |
-| -------------------- | ----------------------- |
-| Event                | `MOL.EVENT.<nodeID>`    |
-| Event (balanced)     | `MOL.EVENTB.<event>`    |
-| Request              | `MOL.REQ.<nodeID>`      |
-| Request (balanced)   | `MOL.REQB.<action>`     |
-| Response             | `MOL.RES.<nodeID>`      |
-| Discover             | `MOL.DISCOVER`          |
-| Discover (targetted) | `MOL.DISCOVER.<nodeID>` |
-| Info                 | `MOL.INFO`              |
-| Info (targetted)     | `MOL.INFO.<nodeID>`     |
-| Heartbeat            | `MOL.HEARTBEAT`         |
-| Ping                 | `MOL.PING`              |
-| Ping (targetted)     | `MOL.PING.<nodeID>`     |
-| Pong                 | `MOL.PONG.<nodeID>`     |
-| Disconnect           | `MOL.DISCONNECT`        |
+| Type                | Topic name              |
+| ------------------- | ----------------------- |
+| Event               | `MOL.EVENT.<nodeID>`    |
+| Event (balanced)    | `MOL.EVENTB.<event>`    |
+| Request             | `MOL.REQ.<nodeID>`      |
+| Request (balanced)  | `MOL.REQB.<action>`     |
+| Response            | `MOL.RES.<nodeID>`      |
+| Discover            | `MOL.DISCOVER`          |
+| Discover (targeted) | `MOL.DISCOVER.<nodeID>` |
+| Info                | `MOL.INFO`              |
+| Info (targeted)     | `MOL.INFO.<nodeID>`     |
+| Heartbeat           | `MOL.HEARTBEAT`         |
+| Ping                | `MOL.PING`              |
+| Ping (targeted)     | `MOL.PING.<nodeID>`     |
+| Pong                | `MOL.PONG.<nodeID>`     |
+| Disconnect          | `MOL.DISCONNECT`        |
 
 > If `namespace` is defined, the topic prefix is `MOL-<namespace>` instead of `MOL`. E.g.: `MOL-dev.EVENT` when the namespace is `dev`.
 
@@ -48,7 +48,7 @@ If the client does not receive `HEARTBEAT` for `heartbeatTimeout` seconds from a
 
 ### Request-reply
 
-When you call the `broker.call` method, the broker sends a `REQUEST` packet to the targetted node. It processes the request and sends back a `RESPONSE` packet to the requester node.
+When you call the `broker.call` method, the broker sends a `REQUEST` packet to the targeted node. It processes the request and sends back a `RESPONSE` packet to the requester node.
 ![](http://moleculer.services/images/protocol-v2/moleculer_protocol_request.png)
 
 ### Event
@@ -58,7 +58,7 @@ When you call the `broker.emit` method, the broker sends an `EVENT` packet to th
 
 ### Ping-pong
 
-When you call the `broker.ping` method, the broker sends a `PING` packet to the targetted node. If node is not defined, it sends to all nodes. If the client receives the `PING` packet, sends back a `PONG` response packet. If it receives, broker broadcasts a local `$node.pong` event to the local services.
+When you call the `broker.ping` method, the broker sends a `PING` packet to the targeted node. If node is not defined, it sends to all nodes. If the client receives the `PING` packet, sends back a `PONG` response packet. If it receives, broker broadcasts a local `$node.pong` event to the local services.
 ![](http://moleculer.services/images/protocol-v2/moleculer_protocol_pong.png)
 
 ### Disconnect
@@ -127,35 +127,35 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ```json
 {
-    "services": [
-        {
-            "name": "$node",
-            "settings": {},
-            "metadata": {},
-            "actions": [],
-            "events": {}
-        },
-        {
-            "name": "greeter",
-            "settings": {},
-            "metadata": {},
-            "actions": [],
-            "events": {}
-        }
-    ],
-    "ipList": ["10.35.0.34"],
-    "hostname": "moleculer-server",
-    "client": {
-        "type": "nodejs",
-        "version": "0.14.0-beta3",
-        "langVersion": "v12.10.0"
+  "services": [
+    {
+      "name": "$node",
+      "settings": {},
+      "metadata": {},
+      "actions": [],
+      "events": {}
     },
-    "config": {},
-    "instanceID": "ee21e97d-9fd0-4d7e-a303-70b1605f477f",
-    "metadata": {},
-    "seq": 2,
-    "ver": "4",
-    "sender": "nodeID-1"
+    {
+      "name": "greeter",
+      "settings": {},
+      "metadata": {},
+      "actions": [],
+      "events": {}
+    }
+  ],
+  "ipList": ["10.35.0.34"],
+  "hostname": "moleculer-server",
+  "client": {
+    "type": "nodejs",
+    "version": "0.14.0-beta3",
+    "langVersion": "v12.10.0"
+  },
+  "config": {},
+  "instanceID": "ee21e97d-9fd0-4d7e-a303-70b1605f477f",
+  "metadata": {},
+  "seq": 2,
+  "ver": "4",
+  "sender": "nodeID-1"
 }
 ```
 
@@ -325,9 +325,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
   "data": {
     "name": "John"
   },
-  "groups": [
-    "greeter"
-  ],
+  "groups": ["greeter"],
   "broadcast": false,
   "meta": {},
   "level": 1,
@@ -460,15 +458,29 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ## Graceful starting & stopping
 
-!!TODO!!
+### Start
+
+The broker starts by establishing connection with the `transporter` (e.g., NATS server, MQTT broker). After successfully establishing the connection, it starts all services, i.e., calls service `started` handlers. Once all services have started successfully, broker publishes the local service list to remote nodes. Hence remote nodes will send requests only after all local service have started properly.
+
+**Start lifecycle sequence**
+
+![image](media/broker-start.svg)
+
+### Stop
+
+When broker is stopping, it starts by publishing an empty service list to all remote nodes. This is done to inform all remote nodes that the node and it's service will be shut down. Next, broker starts stopping all local services. After that, the transporter disconnects.
+
+**Stop lifecycle sequence**
+
+![image](media/broker-stop.svg)
 
 ## Streams
 
-!!TODO!!
+While transferring streams, sequence number (`seq`) field is used to keep track of the chunks and their order. This is especially important in "multi-threaded systems" that can shuffle the packets before sending them. If packets arrive unordered they are stored in a pool until previous chucks arrive.
 
 ## Disabled built-in balancer mode
 
-!!TODO!!
+When built-in load balancing mechanisms are disabled, the balancing is done by the brokers (e.g., NATS, RabbitMQ). This means that there are no local calls in actions and events. All requests are transferred to transporter that will be responsible for choosing the destination of the request and delivery of the message.
 
 ## Changes from version `3`
 
