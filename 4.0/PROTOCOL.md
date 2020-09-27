@@ -216,7 +216,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 > (\*\*) In case of schema-based serializers, the field value is encoded to JSON string and transferred as binary data.
 
-> (\*\*) Used only in `ProtoBuf`, `Avro`, `Thrift` or any other schema-based serializer to detect the original type of data.
+> (\*\*\*) Used only in `ProtoBuf`, `Avro`, `Thrift` or any other schema-based serializer to detect the original type of data.
 
 **Example with JSON serializer**
 
@@ -264,7 +264,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 > (\*\*) In case of schema-based serializers, the field value is encoded to JSON string and transferred as binary data.
 
-> (\*\*) Used only in `ProtoBuf`, `Avro`, `Thrift` or any other schema-based serializer to detect the original type of data.
+> (\*\*\*) Used only in `ProtoBuf`, `Avro`, `Thrift` or any other schema-based serializer to detect the original type of data.
 
 **Example with JSON serializer**
 
@@ -314,7 +314,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 > (\*\*) In case of schema-based serializers, the field value is encoded to JSON string and transferred as binary data.
 
-> (\*\*) Used only in `ProtoBuf`, `Avro`, `Thrift` or any other schema-based serializer to detect the original type of data.
+> (\*\*\*) Used only in `ProtoBuf`, `Avro`, `Thrift` or any other schema-based serializer to detect the original type of data.
 
 **Example with JSON serializer**
 
