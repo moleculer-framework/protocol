@@ -484,6 +484,10 @@ When built-in load balancing mechanisms are disabled, the balancing is done by t
 
 ## Changes from version `3`
 
+**INFO**
+- added `instanceID: string`
+- added `metadata: object` specific to each nodes
+
 **PING / PONG**
 - added messaged ID `id: string` on both message types
 
