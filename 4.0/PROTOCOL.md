@@ -484,4 +484,27 @@ When built-in load balancing mechanisms are disabled, the balancing is done by t
 
 ## Changes from version `3`
 
-!!TODO!!
+**PING / PONG**
+- added messaged ID `id: string` on both message types
+
+**REQUEST**
+- `params` now is not required anymore 
+- removed `metrics` property and added `tracing: boolean` whether tracing events is needed
+- new `paramsType: enum` needed for schema-based serializers
+- new `caller: string` property for action name of the caller
+- new `seq: int32` to have better tracking of stream request
+
+**RESPONSE**
+- new `paramsType: enum` needed for schema-based serializers
+- new `seq: int32` to have better tracking of stream request
+
+**EVENT**
+- added context ID `id: string` in the payload
+- new `dataType: enum` needed for schema-based serializers
+- new `meta: object` that represents `ctx.meta` object
+- added `level: int32` as level of the event
+- added `tracing: boolean` whether tracing events is needed
+- new `caller: string` property for action/event name of the caller
+- added parent context ID `parentID: string`
+- added `requestID` from context in the payload
+- handled stream requests, hence we have new properties `stream: boolean` whether it's a stream request and `seq: int32` to have better tracking
