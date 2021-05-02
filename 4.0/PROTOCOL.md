@@ -499,7 +499,7 @@ When built-in load balancing mechanisms are disabled, the balancing is done by t
 - new `seq: int32` to have better tracking of stream request
 
 **RESPONSE**
-- new `paramsType: enum` needed for schema-based serializers
+- new `dataType: enum` needed for schema-based serializers
 - new `seq: int32` to have better tracking of stream request
 
 **EVENT**
