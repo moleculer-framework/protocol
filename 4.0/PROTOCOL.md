@@ -53,7 +53,7 @@ When you call the `broker.call` method, the broker sends a `REQUEST` packet to t
 
 ### Event
 
-When you call the `broker.emit` method, the broker sends an `EVENT` packet to the subscriber nodes. The broker groups & balances the subscribers, so only one instance per service receives the event. If you call the `broker.broadcast` method, the broker sends an `ĘVENT` packet to all subscriber nodes. It doesn't group & balance the subscribers.
+When you call the `broker.emit` method, the broker sends an `EVENT` packet to the subscriber nodes. The broker groups & balances the subscribers, so only one instance per service receives the event. If you call the `broker.broadcast` method, the broker sends an `ĘVENT` packet to all subscriber nodes. It doesn't balance the subscribers.
 ![](http://moleculer.services/images/protocol-v2/moleculer_protocol_event.png)
 
 ### Ping-pong
