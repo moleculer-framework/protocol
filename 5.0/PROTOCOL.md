@@ -89,7 +89,7 @@ When the transporter established the connection with the message broker, it broa
 
 ```json
 {
-  "ver": "4",
+  "ver": "5",
   "sender": "node-100"
 }
 ```
@@ -154,7 +154,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
   "instanceID": "ee21e97d-9fd0-4d7e-a303-70b1605f477f",
   "metadata": {},
   "seq": 2,
-  "ver": "4",
+  "ver": "5",
   "sender": "nodeID-1"
 }
 ```
@@ -178,7 +178,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ```json
 {
-  "ver": "4",
+  "ver": "5",
   "sender": "node-100",
   "cpu": 13.5
 }
@@ -228,7 +228,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
   "requestID": "41238213-da6b-4313-9909-e6edd0e40a96",
   "caller": null,
   "stream": false,
-  "ver": "4",
+  "ver": "5",
   "sender": "nodeID-1"
 }
 ```
@@ -266,7 +266,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
   "data": {
     "message": "Hello Moleculer"
   },
-  "ver": "4",
+  "ver": "5",
   "sender": "nodeID-2"
 }
 ```
@@ -319,7 +319,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
   "requestID": "e102630b-c702-4ff9-a0a1-52428395d57a",
   "caller": null,
   "needAck": null,
-  "ver": "4",
+  "ver": "5",
   "sender": "nodeID-1"
 }
 ```
@@ -350,7 +350,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ```json
 {
-  "ver": "4",
+  "ver": "5",
   "sender": "node-100"
 }
 ```
@@ -382,7 +382,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 {
   "time": 1567677050576,
   "id": "3e09738f-cedf-4985-85fe-344860c06cfd",
-  "ver": "4",
+  "ver": "5",
   "sender": "nodeID-2"
 }
 ```
@@ -413,7 +413,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
   "time": 1567677050576,
   "id": "3e09738f-cedf-4985-85fe-344860c06cfd",
   "arrived": 1567677050577,
-  "ver": "4",
+  "ver": "5",
   "sender": "nodeID-1"
 }
 ```
@@ -436,7 +436,7 @@ When the node receives an `INFO` packet, it sends an `INFO` packet which contain
 
 ```json
 {
-  "ver": "4",
+  "ver": "5",
   "sender": "node-100"
 }
 ```
